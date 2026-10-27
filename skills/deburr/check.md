@@ -2,6 +2,8 @@
 
 Run this after any UI change, before saying the work is done. Work through it in order, fix what fails, then run it again.
 
+Check only what you changed. Problems you notice elsewhere go in the report, not in the diff.
+
 ## 1. Scan the code
 
 If Node is available, run the scanner on the files you changed, or on the source folder:
@@ -24,7 +26,11 @@ It catches the patterns that can be found in code:
 - long durations
 - scaling from zero
 
-Each finding is either a fix or a deliberate choice. If it's deliberate (for example, the brand really is indigo), say so in your report.
+The scanner reports two groups: **functional and accessibility** problems, and **style** suggestions. Treat both as hints, not proof:
+- Read the surrounding code before changing anything, and never fix findings in bulk.
+- A style finding that is a deliberate choice (the brand really is indigo, the mono heading is intended) stays. Say so in your report.
+- If the scanner exits with an error or scans no files, the scan didn't happen. Don't report it as clean.
+- A clean scan only means these patterns weren't found. It doesn't verify motion, accessibility or the mobile experience.
 
 If Node isn't available, search for the same patterns by hand.
 
@@ -93,4 +99,5 @@ If you can run the app in the iOS Simulator, do: trigger the states and take scr
 End with a short note:
 - **Checked:** which steps you ran and how (scanner, browser, by reading the code).
 - **Fixed:** what you changed as a result.
-- **Not verified:** anything you couldn't check, and why. For example, no browser was available to watch the motion.
+- **Not verified:** anything you couldn't check, and why. For example, no browser was available to watch the motion. Always include this line, even when the scan was clean.
+- **Outside scope:** problems you noticed but didn't touch.

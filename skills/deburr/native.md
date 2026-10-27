@@ -81,7 +81,7 @@ When the app is written in Swift, everything follows the system:
 
 ### Motion
 
-- **Animate every state change:** use `withAnimation` or `.animation(_:value:)` so nothing changes instantly.
+- **Animate state changes the user should follow:** use `withAnimation` or `.animation(_:value:)` so they don't jump. Keep text entry and repeated taps immediate.
 - **Curves:** use system springs (`.smooth`, `.snappy`; `.bouncy` only for small playful moments). On iOS, springs are the native feel. What to avoid is extra, exaggerated overshoot.
 - **Movement between views:** `.transition`, `matchedGeometryEffect` and navigation zoom transitions where the system offers them. `.contentTransition(.numericText())` for changing numbers.
 - **Gestures:** let them drive motion directly and stay interruptible.
@@ -112,7 +112,7 @@ React Native should feel native too. Prefer native-backed building blocks over J
 ### Motion
 
 - **Run animations on the UI thread:** use Reanimated (layout animations like `entering`, `exiting` and layout transitions for lists) and Gesture Handler. With the built-in `Animated` API, always set `useNativeDriver: true`.
-- **Animate every change:** items added to or removed from lists, expanding rows, appearing errors.
+- **Animate changes the user should follow:** items added to or removed from lists, expanding rows, appearing errors. Input stays immediate.
 - **Curves:** use springs that feel like the platform: well damped, with no big overshoot.
 - **Haptics:** platform haptics (for example `expo-haptics`) on meaningful moments only.
 - **Reduce Motion:** read it (`useReducedMotion` or `AccessibilityInfo`) and simplify motion.

@@ -71,9 +71,11 @@ The technical rules for accessibility, forms, performance, interaction and platf
 
 ## Motion
 
-The rule underneath all of these: **nothing on screen changes abruptly.** Every change of state, position, size or visibility is eased.
+The rule underneath all of these: **nothing on screen changes abruptly.** Changes of state, position, size or visibility are eased when that helps the user follow them.
 
-1. **Animate the small things too.** Hover, press, toggles, checkboxes, tab changes, counters, tooltips, menus and validation messages all transition. Nothing snaps.
+Motion has a job: feedback, orientation or understanding a state change. It isn't decoration on every change. Typing, keyboard use and frequently repeated actions are never slowed down by it.
+
+1. **Animate the small things too.** Hover, press, toggles, checkboxes, tab changes, counters, tooltips, menus and validation messages transition. Nothing snaps, but nothing lags either: input feedback stays immediate.
 2. **Except focus rings, which appear instantly.** Keyboard users need to see where they are at once; a fading ring feels laggy when tabbing quickly.
 3. **Nothing flashes.** No white flash between pages or themes, no flicker while loading, no content that appears and immediately reflows. Reserve space before content arrives.
 4. **No screen arrives all at once.** New views, modals, sheets and panels enter with a short fade and small movement. Lists can stagger their items slightly.
@@ -161,6 +163,8 @@ The rule underneath all of these: **nothing on screen changes abruptly.** Every 
 8. **No em dashes (—).** Use a period, a comma, a colon or parentheses instead. Em dashes are one of the most recognizable marks of generated copy, in headlines, buttons and body text alike. Hyphens in compound words and en dashes in ranges (9–5) are fine.
 
 ## Avoid: signs of generated UI
+
+These are defaults for when nothing else decides. If the user asked for it or the project already uses it consistently, keep it. None of these are on the level of an accessibility failure. That exception covers existing work only: never add these patterns yourself.
 
 - Purple-to-blue gradients, glows and glassmorphism added by default.
 - All-caps, wide-tracked labels, especially in mono: "FEATURES", "01. APPROACH", "SYSTEM / STATUS".

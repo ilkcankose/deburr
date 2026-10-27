@@ -40,6 +40,16 @@ Then it checks its own work. Before the agent calls the job done, it does two th
 
 It reports what it checked, what it fixed and what it couldn't verify.
 
+## What it won't do
+
+`deburr` reduces friction without changing what the product is trying to be.
+- **Your call wins.** It never overrides an explicit preference or a deliberate design decision.
+- **It stays in scope.** A small fix stays small. Unrelated problems are reported, not rewritten.
+- **A review is a report.** Asking for a review doesn't let it edit your files.
+- **Motion has a job.** It animates what helps you follow a change, and never delays typing, keyboard use or repeated actions.
+- **Style isn't a bug.** A mono heading, all caps, a gradient or a color used on purpose stays, and it's never ranked with accessibility failures. "On purpose" means you asked for it or your project already uses it; the agent's own new code gets no such pass.
+- **The scanner gives hints, not verdicts.** Nothing is auto-fixed from a scan, and a clean scan isn't presented as proof that motion, accessibility or mobile were checked.
+
 ## Native apps
 
 For iOS and React Native, `deburr` goes native first:
@@ -99,6 +109,14 @@ It flags:
 - em dashes in text
 - sluggish durations
 - elements that scale up from zero
+
+It reports functional and accessibility problems separately from style suggestions. It also:
+- fails, instead of saying "clean", when a target is missing or unreadable or no files were scanned
+- respects `.gitignore`
+- doesn't follow symbolic links, and never leaves the target folder
+- skips files over 1 MB
+
+Options: `--follow-symlinks`, `--no-gitignore` and `--max-size=<kb>`. It exits 0 when clean, 1 with findings and 2 when the scan itself failed.
 
 Add `deburr-ignore` to a line, or `deburr-ignore-file` anywhere in a file, to skip it.
 
