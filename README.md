@@ -88,4 +88,4 @@ The technical rules for accessibility, forms, performance and platform details a
 
 ## License
 
-[MIT](LICENSE) © 2026 İlkcan Köse
+[MIT](LICENSE) © 2026 Ilkcan Kose
