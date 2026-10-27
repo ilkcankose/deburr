@@ -20,6 +20,7 @@ It catches the patterns that can be found in code:
 - `...` instead of `…`
 - click handlers on `div`s
 - emoji in headings
+- em dashes in text
 - long durations
 - scaling from zero
 
@@ -71,7 +72,23 @@ If a browser is available, open the page and actually trigger these states. Watc
 - [ ] **Names:** icon buttons have labels, inputs have labels, and images have `alt`.
 - [ ] **Keyboard:** everything works from the keyboard.
 
-## 6. Report
+## 6. Native app pass (iOS / React Native)
+
+Skip this pass for web projects.
+
+- [ ] **System components:** is every standard piece (navigation, tabs, sheets, menus, lists, pickers, alerts) a system component? Or a native-backed one, in React Native?
+- [ ] **Glass and materials:** on iOS 26 and later, do floating controls use system glass instead of hand-made blur? Is there a fallback for older versions?
+- [ ] **Text:** does all text use text styles and scale with Dynamic Type? Check at the largest size.
+- [ ] **Icons and color:** are icons SF Symbols, sized to their text? Are colors semantic, so dark mode works?
+- [ ] **Animation:** does every state change animate with system springs? Are list inserts and deletions animated?
+- [ ] **Screen edges:** does scrolling content run under the header and the tab bar, then blur and fade progressively at the top and bottom of the screen? No hard line, and no boxed content?
+- [ ] **Interaction:** are touch targets at least 44pt? Are haptics used only on meaningful moments?
+- [ ] **Reduce settings:** are Reduce Motion and Reduce Transparency respected?
+- [ ] **VoiceOver:** does every control have a label and a real button role?
+
+If you can run the app in the iOS Simulator, do: trigger the states and take screenshots, in both light and dark mode.
+
+## 7. Report
 
 End with a short note:
 - **Checked:** which steps you ran and how (scanner, browser, by reading the code).

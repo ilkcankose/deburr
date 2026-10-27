@@ -49,8 +49,9 @@ The technical rules for accessibility, forms, performance, interaction and platf
 6. **Consistent corners.** Pick a radius family and keep it.
 7. **Nested corners are concentric.** When a rounded element sits inside another, the inner radius is smaller and the outer radius larger: inner radius = outer radius − padding between them. Equal radii on nested shapes look wrong.
 8. **Icons are small and quiet.** Size icons to the text beside them (roughly the text's size, usually 14–20px) and match their stroke weight. Icons support a label; they are never oversized decoration. Use one icon set throughout.
-9. **No decorative clutter.** Don't scatter watermark-like extras around the edges: corner labels, coordinates, index numbers like "01 / 05", version tags, crosshairs, grid marks, faint repeated words. Every piece of text on screen has a job. This applies to sites, apps and slides alike.
-10. **Layout uses the platform.**
+9. **Content dissolves at fixed edges.** When the page scrolls under a fixed header or bottom bar, content doesn't stop at a hard line or a solid bar color. The bar's backdrop blurs progressively toward the edge: stacked `backdrop-filter: blur()` layers, each masked with a `linear-gradient`. The content's opacity fades over the same band. Inner scroll areas (sidebars, chat threads) fade their edges the same way, never with a hard cut. Don't box content into a card to avoid it.
+10. **No decorative clutter.** Don't scatter watermark-like extras around the edges: corner labels, coordinates, index numbers like "01 / 05", version tags, crosshairs, grid marks, faint repeated words. Every piece of text on screen has a job. This applies to sites, apps and slides alike.
+11. **Layout uses the platform.**
     - Use flex and grid rather than measuring with JavaScript.
     - Full-bleed layouts respect `env(safe-area-inset-*)` on notched devices.
     - Containers don't produce unwanted scrollbars; fix the overflowing content instead of hiding it everywhere.
@@ -157,16 +158,18 @@ The rule underneath all of these: **nothing on screen changes abruptly.** Every 
 5. **Active voice and second person.** "Install the CLI", not "The CLI will be installed". Address the user as "you".
 6. **Numerals for counts:** "8 projects", not "eight projects".
 7. **Errors include the next step**, not just the problem.
+8. **No em dashes (—).** Use a period, a comma, a colon or parentheses instead. Em dashes are one of the most recognizable marks of generated copy, in headlines, buttons and body text alike. Hyphens in compound words and en dashes in ranges (9–5) are fine.
 
 ## Avoid: signs of generated UI
 
 - Purple-to-blue gradients, glows and glassmorphism added by default.
-- All-caps, wide-tracked labels, especially in mono: "FEATURES", "01 — APPROACH", "SYSTEM / STATUS".
+- All-caps, wide-tracked labels, especially in mono: "FEATURES", "01. APPROACH", "SYSTEM / STATUS".
 - Decorative text and marks scattered around the layout like watermarks: corner captions, coordinates, serial numbers, timestamps, crosshairs.
 - Emoji used as icons, or every heading paired with an icon.
 - Everything centered, everything in cards, every section in the same layout.
 - Too many colors, weights and sizes on one screen.
 - Generic copy: "Unlock the power of…", "Seamless", "Revolutionize", "Elevate".
+- Em dashes (—) anywhere in the copy.
 - Identical three-column feature grids with vague one-line descriptions.
 - Default shadows that are too dark and borders on everything.
 - Hard cuts: elements that snap, pop or flash into place.

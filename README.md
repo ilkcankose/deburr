@@ -40,6 +40,26 @@ Then it checks its own work. Before the agent calls the job done, it does two th
 
 It reports what it checked, what it fixed and what it couldn't verify.
 
+## Native apps
+
+For iOS and React Native, `deburr` goes native first:
+- System components over custom ones.
+- Liquid Glass on iOS 26 and later.
+- SF Symbols sized to their text.
+- Dynamic Type everywhere.
+- System springs and haptics on meaningful moments.
+
+In Swift, everything follows the system. In React Native, native-backed navigation, tabs, glass and Reanimated come first. It builds a custom piece only when the SDK has nothing for the job, and makes it feel like the system shipped it, unless you're deliberately designing something original.
+
+The rules are in [`native.md`](skills/deburr/native.md). The scanner also checks Swift and React Native code for:
+- fixed font sizes
+- tap gestures used in place of buttons
+- hardcoded colors
+- fake glass
+- legacy touchables
+- JS-thread animations
+- disabled font scaling
+
 ## Install
 
 ```bash
@@ -56,6 +76,7 @@ It triggers on its own whenever the agent builds, changes or reviews UI, or when
 | --- | --- |
 | [`SKILL.md`](skills/deburr/SKILL.md) | How the agent works: read the project, build with the core rules, check before finishing |
 | [`rules.md`](skills/deburr/rules.md) | The full rules: color, type, layout, states, motion, accessibility, forms, touch, performance, content |
+| [`native.md`](skills/deburr/native.md) | Native-first rules for iOS (SwiftUI, Liquid Glass) and React Native |
 | [`check.md`](skills/deburr/check.md) | The finishing check the agent runs every time |
 | [`scan.mjs`](skills/deburr/scripts/scan.mjs) | A zero-dependency scanner for problems you can find in code |
 
@@ -75,6 +96,7 @@ It flags:
 - `...` instead of `…`
 - click handlers on `div`s
 - emoji in headings
+- em dashes in text
 - sluggish durations
 - elements that scale up from zero
 

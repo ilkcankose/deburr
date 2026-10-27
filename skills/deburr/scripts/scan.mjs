@@ -11,10 +11,12 @@ const EXTENSIONS = new Set([
   ".html", ".htm",
   ".js", ".jsx", ".ts", ".tsx", ".mjs",
   ".vue", ".svelte", ".astro", ".mdx",
+  ".swift",
 ]);
 const SKIP_DIRS = new Set([
   "node_modules", ".git", "dist", "build", "out", ".next", ".nuxt",
   ".svelte-kit", ".astro", ".vercel", "coverage", "vendor",
+  "Pods", "DerivedData", ".build",
 ]);
 
 const DEFAULT_ACCENT_HEX = [
@@ -107,11 +109,80 @@ const RULES = [
     message: "scaling from zero; start near the final size (around 0.95) and fade in",
   },
   {
+    id: "em-dash",
+    test: (line) => line.includes("\u2014") && !/^\s*(\/\/|\/\*|\*|<!--|#)/.test(line),
+    message: "em dash in text; use a period, comma, colon or parentheses instead",
+  },
+  {
     id: "autofocus",
     test: (line) => /\bautoFocus\b|\bautofocus\b/.test(line),
     message: "autofocus; use only for a single primary input on desktop",
   },
 ];
+
+
+// Native app rules. Swift rules only run on .swift files; React Native rules on JS/TS files.
+const SWIFT_RULES = [
+  {
+    id: "em-dash",
+    test: (line) => line.includes("\u2014") && !/^\s*(\/\/|\/\*|\*)/.test(line),
+    message: "em dash in text; use a period, comma, colon or parentheses instead",
+  },
+  {
+    id: "swift-fixed-font",
+    test: (line) => /\.font\(\s*\.system\(\s*size:/.test(line) || /Font\.system\(\s*size:/.test(line) || /UIFont\.systemFont\(\s*ofSize:/.test(line),
+    message: "fixed font size ignores Dynamic Type; use a text style (.body, .headline…) or scale with @ScaledMetric",
+  },
+  {
+    id: "swift-tap-gesture",
+    test: (line) => /\.onTapGesture\s*[({]/.test(line),
+    message: "tap gesture on a view; use Button so VoiceOver, keyboard and pointer work (keep onTapGesture only for non-actions)",
+  },
+  {
+    id: "swift-hardcoded-color",
+    test: (line) => /Color\(\s*red:|UIColor\(\s*red:|Color\(\s*hex:|Color\(\s*"#/.test(line),
+    message: "hardcoded color; use semantic colors or an asset catalog color with light/dark variants",
+  },
+  {
+    id: "swift-screen-bounds",
+    test: (line) => /UIScreen\.main\.bounds/.test(line),
+    message: "UIScreen.main.bounds for layout; use the view's own size (GeometryReader, containerRelativeFrame) and safe areas",
+  },
+  {
+    id: "swift-fake-glass",
+    test: (line) => /\.blur\(\s*radius:\s*([1-9]\d+)/.test(line),
+    message: "large blur may be imitating glass; use system materials or the glass effect APIs on iOS 26+",
+  },
+];
+
+const RN_RULES = [
+  {
+    id: "rn-font-scaling-off",
+    test: (line) => /allowFontScaling\s*=\s*\{?\s*false/.test(line),
+    message: "font scaling disabled; cap it with maxFontSizeMultiplier instead of turning it off",
+  },
+  {
+    id: "rn-touchable",
+    test: (line) => /\b(TouchableOpacity|TouchableHighlight|TouchableWithoutFeedback)\b/.test(line) && !/^\s*import/.test(line),
+    message: "legacy Touchable; use Pressable with visible pressed feedback",
+  },
+  {
+    id: "rn-js-driver",
+    test: (line) => /useNativeDriver\s*:\s*false/.test(line),
+    message: "animation on the JS thread; use useNativeDriver: true or Reanimated",
+  },
+  {
+    id: "rn-scrollview-map",
+    test: (line, context) => /<ScrollView\b/.test(line) && /\.map\(/.test(context),
+    message: "mapping rows inside a ScrollView; use FlatList/FlashList for long lists",
+  },
+  {
+    id: "rn-hardcoded-inset",
+    test: (line) => /padding(Top|Bottom)\s*:\s*(44|47|48|59|34|20)\b/.test(line) && /safe|inset|notch|status/i.test(line),
+    message: "hardcoded safe-area inset; use react-native-safe-area-context",
+  },
+];
+const isReactNative = (text) => /from\s+["']react-native["']/.test(text);
 
 function walk(path, files) {
   let stats;
@@ -139,11 +210,12 @@ for (const file of files) {
   const text = readFileSync(file, "utf8");
   if (text.includes("deburr-ignore-file")) continue;
   const lines = text.split("\n");
+  const rules = file.endsWith(".swift") ? SWIFT_RULES : isReactNative(text) ? [...RULES, ...RN_RULES] : RULES;
   const findings = [];
   lines.forEach((line, i) => {
     if (line.includes("deburr-ignore")) return;
     const context = lines.slice(Math.max(0, i - 4), i + 6).join("\n");
-    for (const rule of RULES) {
+    for (const rule of rules) {
       if (rule.test(line, context)) findings.push(`${relative(".", file)}:${i + 1} ${rule.id}: ${rule.message}`);
     }
   });

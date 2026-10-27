@@ -1,6 +1,6 @@
 ---
 name: deburr
-description: Make interfaces feel smooth and considered instead of AI-generated. Use whenever building, changing, polishing or reviewing UI (web pages, app screens, components, dashboards, slides built in HTML), or when someone says it looks generic, cramped, janky, flashy or "AI-made". Works with the project's existing brand; never imposes a style.
+description: Make interfaces feel smooth and considered instead of AI-generated. Use whenever building, changing, polishing or reviewing UI (web pages, web apps, iOS/SwiftUI and React Native screens, components, dashboards, slides built in HTML), or when someone says it looks generic, cramped, janky, flashy or "AI-made". Works with the project's existing brand; never imposes a style. For native apps it goes native first: system components, Liquid Glass, SF Symbols, Dynamic Type.
 ---
 
 # Deburr
@@ -8,6 +8,8 @@ description: Make interfaces feel smooth and considered instead of AI-generated.
 The goal isn't a look. It's a feel: nothing changes abruptly, nothing is cramped, and hierarchy is obvious. Plain and well-ordered beats clever. These rules work with whatever fonts, colors and components the project already has.
 
 The full rules are in [rules.md](rules.md). The finishing check is in [check.md](check.md). Read both before your first UI change in a session.
+
+**Building a native app?** Also read [native.md](native.md). iOS and React Native come first. In Swift, everything goes native: system components, Liquid Glass on iOS 26 and later, SF Symbols, Dynamic Type and system springs. Build custom pieces only when the SDK has nothing for the job, and make them feel like the system. Skip this only when the user is deliberately designing something original.
 
 ## How to work
 
@@ -45,7 +47,7 @@ These are the ones most often missed. Everything else is in `rules.md`.
 - All-caps, letter-spaced labels or eyebrows, mono or not.
 - Watermark-like clutter: corner captions, coordinates, "01 / 05" counters, crosshairs.
 - Mono is only for genuinely technical content, and small.
-- No emoji icons, no default gradients or glassmorphism, no generic copy.
+- No emoji icons, no default gradients or glassmorphism, no generic copy, no em dashes (—) in any text.
 
 ### 3. Check before you finish
 
@@ -56,7 +58,7 @@ Run the check in [check.md](check.md) every time you've changed UI. Fix what it 
 When asked to review rather than build:
 
 1. Run the same check.
-2. Report findings grouped by file, most important first, as `path:line — problem → fix`. Keep each finding to one line, and add an explanation only when the fix isn't obvious.
+2. Report findings grouped by file, most important first, as `path:line: problem → fix`. Keep each finding to one line, and add an explanation only when the fix isn't obvious.
 3. Group the findings into three tiers:
    - **Abrupt or broken:** snaps, flashes, layout shift, missing states, failing contrast.
    - **Cramped or unclear:** spacing and hierarchy.
