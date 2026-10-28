@@ -1,6 +1,8 @@
 # Library
 
-Design resources grouped by what they're for (2026-10-26). The material comes from three places:
+Design resources grouped by what they're for (2026-10-26). They're here for inspiration and learning, not to copy. Study how a site solves something, then solve it your own way; don't clone anyone's interface. Component libraries are the exception, since they're published to be used, under their own licenses.
+
+The material comes from three places:
 
 - **Resources folder:** 41 sites, each reviewed in detail. Entries cover what it is, price, maker, when to use it and notes on the site's own design.
 - **DesEngs:** its resource list, about 120 entries.

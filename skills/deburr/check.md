@@ -41,6 +41,7 @@ Go through every interactive element and conditional render you touched:
 
 - [ ] **Hover and press:** does the element transition its color, background or scale? Or does it snap?
 - [ ] **Small controls:** do toggles, checkboxes, radios, tabs and segmented controls animate their change?
+- [ ] **Toasts and drawers:** do toasts stack, pause on hover and get announced? Do drawers follow the drag and close by swipe? See the Toasts and drawers rules.
 - [ ] **Things that appear and disappear:** do tooltips, menus, popovers, toasts, validation messages and expanding sections have both an enter and an exit? Is the exit faster than the enter?
 - [ ] **New screens:** do new views, modals, sheets and drawers fade or move in? Or do they appear at once?
 - [ ] **Size changes:** when content changes height (accordions, list add/remove, async content), does the height animate? Or does the layout jump?

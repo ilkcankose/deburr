@@ -74,6 +74,30 @@ The technical rules for accessibility, forms, performance, interaction and platf
 5. **Destructive actions are reversible or confirmed.** Use a confirmation step or an undo window; never act immediately.
 6. **State lives in the URL.** Filters, tabs, pagination and expanded panels are reflected in query parameters so they can be shared and deep-linked.
 
+## Toasts and drawers
+
+If the project already has a toast or drawer component, use it and hold it to these rules. If it has none, on React web:
+- use [Sonner](https://github.com/emilkowalski/sonner) for toasts
+- use [Vaul](https://github.com/emilkowalski/vaul) for drawers
+
+Both are MIT, by Emil Kowalski. Vaul is marked unmaintained, so check that it works with the project's React version first. On iOS, use the system sheet instead (see [native.md](native.md)).
+
+1. **Toasts arrive softly and stay out of the way.**
+   - They slide a few pixels and fade in from the edge they live on.
+   - Several toasts stack neatly instead of piling up.
+   - They pause while hovered or focused, and can be swiped away.
+   - They're announced with `aria-live="polite"`.
+   - They're never the only place an important error appears.
+2. **Toasts are for outcomes, not every click.** Show one when something finished, failed or can be undone ("Project deleted. Undo"). Don't show one for actions whose result is already visible.
+3. **Drawers feel physical.**
+   - They follow the finger or pointer while dragging, and close by drag or swipe.
+   - Whether a release closes them depends on its speed, not only the distance.
+   - They open with a sheet-like curve, such as `cubic-bezier(.32,.72,0,1)`.
+   - The background dims slightly.
+   - Scrolling stays inside the drawer.
+   - Focus is trapped while open and returns to the trigger on close.
+4. **Snap points only when they help.** A drawer can rest at a half and a full height when both are useful. Most need just one.
+
 ## Motion
 
 The rule underneath all of these: **nothing on screen changes abruptly.** Changes of state, position, size or visibility are eased when that helps the user follow them.

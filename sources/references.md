@@ -23,6 +23,8 @@ Reading, talks and code libraries behind the pack, credited to their original au
 | Library | For | Author |
 | --- | --- | --- |
 | [Base UI](https://base-ui.com) | Unstyled accessible primitives | MUI |
+| [Sonner](https://github.com/emilkowalski/sonner) | Toasts | Emil Kowalski |
+| [Vaul](https://github.com/emilkowalski/vaul) | Drawers (unmaintained) | Emil Kowalski |
 | [cmdk](https://cmdk.paco.me) | Command menu | Paco Coursey |
 | [input-otp](https://input-otp.rodz.dev) | One-time code input | Guilherme Rodz |
 | [Motion](https://motion.dev) | Animation, springs | Matt Perry |
