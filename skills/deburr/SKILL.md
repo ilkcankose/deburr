@@ -62,7 +62,10 @@ These are the ones most often missed. Everything else is in `rules.md`.
 
 **What not to add** (defaults; keep anything the project does on purpose)
 - All-caps, letter-spaced labels or eyebrows, mono or not.
-- Watermark-like clutter: corner captions, coordinates, "01 / 05" counters, crosshairs.
+- Watermark-like clutter: corner captions, coordinates, "01 / 05" counters, crosshairs, section numbering, code breadcrumbs (file paths, `// labels`).
+- Decorative tags or pills, bordered boxes around every group, dividers between every section.
+- Italic accent words in headlines, trendy display serifs (Instrument Serif and similar), heavy negative tracking.
+- Many shades and opacities of one color, over-detailed UI and detailed decorative diagrams.
 - Mono is only for genuinely technical content, and small.
 - No emoji icons, no default gradients or glassmorphism, no generic copy, no em dashes (—) in any text.
 

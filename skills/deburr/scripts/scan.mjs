@@ -131,6 +131,24 @@ const RULES = [
     message: "em dash in text; use a period, comma, colon or parentheses instead",
   },
   {
+    id: "trendy-serif",
+    kind: "style",
+    test: (line) => /Instrument[ _+-]?Serif/i.test(line),
+    message: "trendy display serif; use the project's own fonts unless this one was chosen on purpose",
+  },
+  {
+    id: "tight-tracking",
+    kind: "style",
+    test: (line) => /\btracking-tighter\b|\btracking-\[-0?\.0[3-9]|\btracking-\[-0?\.[1-9]|letter-spacing\s*:\s*-0?\.(0[3-9]|[1-9])\d*em/.test(line),
+    message: "heavy negative tracking; large text needs only a little (around -0.01 to -0.02em)",
+  },
+  {
+    id: "italic-accent",
+    kind: "style",
+    test: (line) => /<h[1-6]\b[^>]*>[^<]*[^\s<][^<]*<(em|i)\b|<h[1-6]\b[^>]*>[^<]*<(em|i)\b[^>]*>[^<]*<\/(em|i)>[^<]*[^\s<]/.test(line),
+    message: "italic accent word in a heading; emphasis from italics reads as decoration here",
+  },
+  {
     id: "autofocus",
     kind: "functional",
     test: (line) => /\bautoFocus\b|\bautofocus\b/.test(line),

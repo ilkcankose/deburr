@@ -107,6 +107,7 @@ It flags:
 - click handlers on `div`s
 - emoji in headings
 - em dashes in text
+- trendy display serifs, heavy negative tracking and italic accent words in headings
 - sluggish durations
 - elements that scale up from zero
 

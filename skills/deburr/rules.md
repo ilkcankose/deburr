@@ -12,7 +12,7 @@ The technical rules for accessibility, forms, performance, interaction and platf
 
 1. **Contrast is never a guess.** Body text meets WCAG AA (4.5:1). Large text and icons meet 3:1. Check placeholder and disabled text too; they're the usual failures.
 2. **Hierarchy comes from fewer colors, not more.** Use one accent for what matters most. Everything else stays neutral.
-3. **Keep greys in one family.** Secondary and tertiary text are steps of the same ink, not unrelated greys.
+3. **Keep greys in one family, and few of them.** Secondary and tertiary text are steps of the same ink, not unrelated greys. Use a small set of named shades. Don't build hierarchy from many ad-hoc opacities (`/5`, `/10`, `/15`, `/40`, `/60` …) of one color.
 4. **Color carries meaning consistently.** Success, error and warning always look the same, and they're never used as decoration.
 5. **Dark mode is its own palette, not an inverted light mode.** Surfaces get lighter as they come forward, shadows get weaker, and saturated colors are toned down.
 6. **Dark mode is wired up properly.**
@@ -29,7 +29,7 @@ The technical rules for accessibility, forms, performance, interaction and platf
 3. **Title and description are clearly different.** A title is noticeably stronger: larger and/or heavier, in the main ink color. Its description is quieter: regular weight, muted color, comfortable line height. There is a small, consistent gap between them. They never look like two equal lines.
 4. **Few sizes, reused.** A screen uses a handful of sizes and weights, not a new one per element.
 5. **Readable lines.** Body text sits around 60–75 characters per line, with line height around 1.4–1.6. Headings are tighter.
-6. **Large text gets slightly tighter letter spacing.** Small text keeps the font's default spacing.
+6. **Large text gets slightly tighter letter spacing.** Small text keeps the font's default spacing. Slightly means a little (around −0.01 to −0.02em). Heavy negative tracking that squeezes letters together is a generated look, not a refinement.
 7. **Labels and small headings are written in normal case.** Don't use all-caps, letter-spaced "eyebrow" labels, mono or not, above headings, on section titles, in navigation or as tags. Hierarchy comes from size, weight and color instead.
 8. **Monospace only where it's technical.** Use it small, for code, IDs, keys, keyboard shortcuts or tabular figures. It isn't a decorative or "techy" voice for headings and labels.
 9. **Typographic hygiene:**
@@ -38,6 +38,7 @@ The technical rules for accessibility, forms, performance, interaction and platf
    - Use `…` instead of `...`, curly quotes instead of straight ones, and real dashes.
    - Non-breaking spaces between a number and its unit (`10&nbsp;MB`), in shortcuts (`⌘&nbsp;K`) and inside brand names.
    - Loading text ends with an ellipsis: "Loading…", "Saving…".
+10. **Emphasis isn't decoration.** Don't italicize single words inside headlines for flair, and don't reach for a trendy display serif (Instrument Serif and similar) as the "designed" voice. Use the project's fonts, and use italic only where it has a meaning, like titles of works or a real stress.
 
 ## Layout and surface
 
@@ -45,16 +46,20 @@ The technical rules for accessibility, forms, performance, interaction and platf
 2. **Padding and gaps follow a scale.** Spacing comes from a small set of values (for example 4, 8, 12, 16, 24, 32, 48). The same kind of gap always uses the same value.
 3. **Spacing shows grouping.** Related things sit closer together than unrelated things. Space between sections is clearly larger than space inside them. A container's padding is at least as large as the gaps between the items inside it.
 4. **Alignment is deliberate.** Elements line up to shared edges. Centering is a choice for short, focal content, not the default for everything.
-5. **Soft separation.** Prefer spacing, subtle background shifts and light hairlines over heavy borders and dark shadows. Shadows are layered and low-opacity.
+5. **Separate with space first.** Spacing and grouping do most of the work. Reach for a subtle background shift next, and a divider or border only when space alone can't show the structure (tables, dense lists, form fields). Don't put a line between every section or a bordered box around every group. Shadows are layered and low-opacity.
 6. **Consistent corners.** Pick a radius family and keep it.
 7. **Nested corners are concentric.** When a rounded element sits inside another, the inner radius is smaller and the outer radius larger: inner radius = outer radius − padding between them. Equal radii on nested shapes look wrong.
 8. **Icons are small and quiet.** Size icons to the text beside them (roughly the text's size, usually 14–20px) and match their stroke weight. Icons support a label; they are never oversized decoration. Use one icon set throughout.
 9. **Content dissolves at fixed edges.** When the page scrolls under a fixed header or bottom bar, content doesn't stop at a hard line or a solid bar color. The bar's backdrop blurs progressively toward the edge: stacked `backdrop-filter: blur()` layers, each masked with a `linear-gradient`. The content's opacity fades over the same band. Inner scroll areas (sidebars, chat threads) fade their edges the same way, never with a hard cut. Don't box content into a card to avoid it.
 10. **No decorative clutter.** Don't scatter watermark-like extras around the edges: corner labels, coordinates, index numbers like "01 / 05", version tags, crosshairs, grid marks, faint repeated words. Every piece of text on screen has a job. This applies to sites, apps and slides alike.
+    - **No section numbering** ("01", "02.", "§3") on marketing or app sections. Numbers are for real sequences, like steps the user follows.
+    - **No tags for decoration.** Pills and badges carry real status or filters. They don't sit above headings or sprinkle across cards.
+    - **No code breadcrumbs.** File paths, fake terminal prompts, `// comments` or `<tags>` used as section labels or ornaments.
 11. **Layout uses the platform.**
     - Use flex and grid rather than measuring with JavaScript.
     - Full-bleed layouts respect `env(safe-area-inset-*)` on notched devices.
     - Containers don't produce unwanted scrollbars; fix the overflowing content instead of hiding it everywhere.
+12. **Detail matches the job.** Don't fill a screen or a mockup with over-detailed UI: fake charts, tiny stats, status dots and controls nobody will use. Show the few pieces that explain the product. Diagrams are a last resort; when one is needed, keep it to the few nodes that carry the idea. The more detailed a decorative diagram, the more generated it looks.
 
 ## States and content handling
 
@@ -176,6 +181,13 @@ These are defaults for when nothing else decides. If the user asked for it or th
 - Em dashes (—) anywhere in the copy.
 - Identical three-column feature grids with vague one-line descriptions.
 - Default shadows that are too dark and borders on everything.
+- Every group in a bordered container, and dividers between every section.
+- Many shades and opacities of the same color doing the work of hierarchy.
+- Small tags or pills above headings, or scattered across cards.
+- Single italic words in headlines, trendy display serifs (Instrument Serif and similar) and tightly squeezed negative tracking.
+- Section numbering: "01", "02", "§ 03".
+- Code breadcrumbs as decoration: file paths, `~/` prompts, `// labels`, `<Section />`.
+- Over-detailed UI and detailed decorative diagrams.
 - Hard cuts: elements that snap, pop or flash into place.
 
 ## Avoid: in code

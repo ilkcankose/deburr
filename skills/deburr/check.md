@@ -23,6 +23,7 @@ It catches the patterns that can be found in code:
 - click handlers on `div`s
 - emoji in headings
 - em dashes in text
+- trendy display serifs, heavy negative tracking, italic accent words in headings
 - long durations
 - scaling from zero
 
@@ -63,6 +64,12 @@ If a browser is available, open the page and actually trigger these states. Watc
 - [ ] **Reading order:** there is one obvious first thing to read on each screen.
 - [ ] **Title and description:** titles are clearly stronger than their descriptions.
 - [ ] **No clutter:** no all-caps tracked labels, no watermark-like extras, and mono only where it's technical.
+- [ ] **No generated tells:**
+  - no section numbering, decorative tags or code breadcrumbs
+  - no bordered box around every group, no divider between every section
+  - no italic accent words or squeezed tracking
+  - a few named shades instead of many opacities
+  - only as much UI detail, and diagram, as the idea needs
 - [ ] **Narrow screens:** check at a narrow width (around 390px) as well as a wide one. Nothing is cramped or overflowing.
 
 ## 4. Color and contrast pass
